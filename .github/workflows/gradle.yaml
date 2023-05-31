@@ -35,5 +35,5 @@ jobs:
             sudo apt install -y gradle
             cat /etc/os-release
             git clone https://github.com/mnogueiraops/ofbiz-pipeline.git
-            cd ofbiz-pipeline/gradle
+            cd ofbiz-pipeline/gradle/
             ./init-gradle-wrapper.sh
