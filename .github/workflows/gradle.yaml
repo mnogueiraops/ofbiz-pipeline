@@ -41,8 +41,24 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
-      run: ./gradlew pullAllPluginsSource check javadoc  
-# Below does not work, see see https://lists.apache.org/thread/80wzf4kclfk5nh2fss56jd6otf7y4n2f
-# BuildBot does it anyway
-#     - name: Builds with Gradle, checks style and run integration tests (just to know if they pass)
-#       run: ./gradlew pullAllPluginsSource check javadoc loadAll testIntegration
+      run: ./gradlew pullAllPluginsSource check javadoc
+  deploy:
+      runs-on: ubuntu-latest
+      steps:
+    - name: executing remote ssh commands using ssh key
+      uses: appleboy/ssh-action@v0.1.10
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_KEY }}
+        port: 22
+        script: |
+            sudo apt install -y git
+            sudo apt install -y openjdk-11-jdk
+            sudo apt install -y gradle
+            cat /etc/os-release
+            git clone https://github.com/mnogueiraops/ofbiz-pipeline.git
+            cd ofbiz-pipeline/gradle
+           ./init-gradle-wrapper.sh
+  
+
