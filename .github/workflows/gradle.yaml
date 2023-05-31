@@ -25,7 +25,10 @@ jobs:
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@v0.1.10
         with:
-          # other parameters
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
           script: |
             sudo apt install -y git
             sudo apt install -y openjdk-11-jdk
