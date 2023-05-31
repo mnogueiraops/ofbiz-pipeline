@@ -36,5 +36,5 @@ jobs:
             cat /etc/os-release
             sudo rm -rf ofbiz-pipeline
             git clone https://github.com/mnogueiraops/ofbiz-pipeline.git
-            cd ofbiz-pipeline/gradle/
-            ./init-gradle-wrapper.sh
+            cd ofbiz-pipeline
+            sh gradle/init-gradle-wrapper.sh
